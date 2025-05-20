@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <title>React App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+
+  <script type="text/babel">
+    const inputName = React.createRef();
+    const inputNumber = React.createRef();
+    const arrData = [];
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const name = inputName.current.value;
+      const number = inputNumber.current.value;
+      arrData.push({ name, number });
+      console.log(arrData);
+      inputName.current.value = "";
+      inputNumber.current.value = "";
+      rootElement.render(<App />);
+    };
+    const Form = () => (<>
+      <form onSubmit={handleSubmit}>
+        <input type="text" ref={inputName} name="name" />
+        <input type="number" ref={inputNumber} name="number" />
+        <input type="submit" value="Submit" />
+      </form>
+    </>);
+
+    const Result = () => <>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <td>Student's name</td>
+            <td>Marks</td>
+          </tr>
+        </thead>
+        <tbody>
+          {arrData.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.number}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table></>
+      ;
+
+    const App = () => (
+      <>
+        <Form />
+        <Result />
+      </>
+    );
+
+    const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+    rootElement.render(<App />);
+  </script>
+</body>
+
+</html>
