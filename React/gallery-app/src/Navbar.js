@@ -4,7 +4,7 @@ import { usePostContext } from "./postContext";
 export const Navbar = () => {
   // remove this and get the value from context
   const { savedPosts } = usePostContext();
-
+  // console.log("Saved Posts:", savedPosts.post);
   const [showSavedList, setShowSavedList] = useState(false);
 
   return (
@@ -15,9 +15,9 @@ export const Navbar = () => {
       {showSavedList && (
         <div className="saved-list">
           {savedPosts.map((p) => (
-            <div className="saved-post" key={p.id}>
-              <h3>{p.text}</h3>
-              <img src={p.img} alt={p.text} />
+            <div className="saved-post" key={p.post.id}>
+              <h3>{p.post.text}</h3>
+              <img src={p.post.img} alt={p.post.text} />
             </div>
           ))}
         </div>

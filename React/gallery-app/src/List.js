@@ -13,7 +13,7 @@ export const List = () => {
           <img
             src="https://cdn-icons-png.flaticon.com/512/102/102279.png"
             alt="save"
-            onClick={() => addPost(p)}
+            onClick={() => addPost({ postID: p.id, post: p, postCount: 1 })}
           />
         </div>
       ))}

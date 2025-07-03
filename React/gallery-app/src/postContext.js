@@ -13,6 +13,18 @@ const usePostContext = () => {
 function PostProvider({ children }) {
   const [savedPosts, setSavedPosts] = useState([]);
   const addPost = (post) => {
+    // Check if the post already exists in savedPosts
+    const existingPost = savedPosts.find((p) => p.postID === post.postID);
+    if (existingPost) {
+      // If it exists, update the postCount
+      setSavedPosts((prevPosts) =>
+        prevPosts.map((p) =>
+          p.postID === post.postID ? { ...p, postCount: p.postCount + 1 } : p
+        )
+      );
+      console.log("Post updated:", post);
+      return;
+    }
     setSavedPosts((prevPosts) => [...prevPosts, post]);
     console.log("Post added:", post);
   };
