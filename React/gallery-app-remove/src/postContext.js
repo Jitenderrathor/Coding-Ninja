@@ -19,12 +19,16 @@ export const PostContextProvider = ({ children }) => {
     }
     setSavedPosts((prev) => [post, ...prev]);
   };
+  const unsavePost = (post) => {
+    const updatedPosts = savedPosts.filter((p) => p.id !== post.id);
+    setSavedPosts(updatedPosts);
+  };
 
   // create a function to unsave post here
 
   return (
     <postContext.Provider
-      value={{ savedPosts, setSavedPosts, resetPosts, savePost }}
+      value={{ savedPosts, setSavedPosts, resetPosts, savePost, unsavePost }}
     >
       {children}
     </postContext.Provider>
